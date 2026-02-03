@@ -1,0 +1,96 @@
+<app-header></app-header>
+
+<div class="heading">
+  Approve Doctors Here
+  <small>(after proper verification)</small>
+</div>
+
+<!-- Search -->
+<div class="search-box">
+  <input type="text" placeholder="Search doctor..." [(ngModel)]="searchText" />
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Identity</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Experience</th>
+        <th>Specialization</th>
+        <th>Worked At</th>
+        <th>Mobile</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let doctor of doctors | async"
+        [hidden]="!filterDoctor(doctor)"
+      >
+        <!-- Image -->
+        <td>
+          <img
+            *ngIf="doctor.gender?.toLowerCase() === 'male'"
+            src="assets/img/maledoctor.png"
+            class="doc-img"
+          />
+
+          <img
+            *ngIf="doctor.gender?.toLowerCase() === 'female'"
+            src="assets/img/femaledoctor.png"
+            class="doc-img"
+          />
+        </td>
+
+        <td>{{ doctor.doctorname }}</td>
+        <td>{{ doctor.email }}</td>
+        <td>{{ doctor.gender }}</td>
+        <td class="highlight">{{ doctor.experience }} yrs</td>
+        <td class="highlight">{{ doctor.specialization }}</td>
+        <td class="hospital">{{ doctor.previoushospital }}</td>
+        <td>{{ doctor.mobile }}</td>
+
+        <!-- Status -->
+        <td>
+          <!-- Admin Controls -->
+          <div *ngIf="loggedUser === 'admin@gmail.com'">
+            <div *ngIf="doctor.status === 'false'">
+              <button class="accepted" (click)="acceptRequest(doctor.email!)">
+                Accept
+              </button>
+
+              <button class="rejected" (click)="rejectRequest(doctor.email!)">
+                Reject
+              </button>
+            </div>
+
+            <div
+              class="status"
+              [ngClass]="getStatusClass(doctor.status)"
+              *ngIf="doctor.status !== 'false'"
+            >
+              {{ getStatusLabel(doctor.status) }}
+            </div>
+          </div>
+
+          <!-- Doctor Self View -->
+          <div
+            *ngIf="
+              currRole.toLowerCase() === 'doctor' && doctor.email === loggedUser
+            "
+          >
+            <div class="status" [ngClass]="getStatusClass(doctor.status)">
+              {{ getStatusLabel(doctor.status) }}
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>

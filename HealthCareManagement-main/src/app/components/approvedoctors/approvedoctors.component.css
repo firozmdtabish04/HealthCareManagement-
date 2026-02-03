@@ -1,0 +1,91 @@
+.heading {
+  text-align: center;
+  font-size: 32px;
+  color: green;
+  margin: 20px;
+  font-weight: bold;
+}
+
+.search-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  padding: 8px;
+  width: 300px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: maroon;
+  color: white;
+}
+
+th,
+td {
+  border: 1px solid gray;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.doc-img {
+  width: 70px;
+}
+
+.highlight {
+  color: maroon;
+  font-size: 18px;
+}
+
+.hospital {
+  color: navy;
+}
+
+/* Status Buttons */
+
+.accepted {
+  background: green;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.pending {
+  background: orange;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+.rejected {
+  background: red;
+  color: rgb(15, 168, 143);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+}
