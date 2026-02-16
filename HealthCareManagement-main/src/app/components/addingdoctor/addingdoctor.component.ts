@@ -10,25 +10,34 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class AddingdoctorComponent implements OnInit {
 
-  doctor = new Doctor();
+  doctor: Doctor = new Doctor();
 
-  constructor(private _service: DoctorService, private _router: Router) { }
+  constructor(
+    private doctorService: DoctorService,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-  }
+  addDoctor(): void {
 
-  addDoctor() {
-    this._service.addDoctorFromRemote(this.doctor).subscribe(
-      data => {
-        console.log("Doctor added Successfully");
-        this._router.navigate(['/admindashboard']);
+    this.doctorService.addDoctorFromRemote(this.doctor).subscribe({
+
+      next: () => {
+
+        console.log("Doctor added successfully");
+        this.router.navigate(['/admindashboard']);
+
       },
-      error => {
-        console.log("process Failed");
-        console.log(error.error);
+
+      error: (err) => {
+
+        console.error("Error adding doctor", err);
+
       }
-    )
+
+    });
+
   }
 
 }
