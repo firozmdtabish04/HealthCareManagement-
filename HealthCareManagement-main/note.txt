@@ -1,1 +1,1 @@
-$env:NODE_OPTIONS = "--openssl-legacy-provider"; ng s -o
+Run project: $env:NODE_OPTIONS = "--openssl-legacy-provider"; ng s -o
