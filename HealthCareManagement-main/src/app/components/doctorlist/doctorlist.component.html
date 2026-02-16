@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <div class="heading-text">Doctors List</div>
+
 <div class="subheading-text">
   (only approved doctors are suggested by the management)
 </div>
@@ -26,15 +27,13 @@
     <div class="img-block">
       <div class="circle">
         <img
-          *ngIf="doctor.gender?.toLowerCase() === 'male'"
-          src="assets/img/maledoctor.png"
+          [src]="
+            doctor.gender && doctor.gender.toLowerCase().trim() === 'female'
+              ? 'assets/img/femaledoctor.png'
+              : 'assets/img/maledoctor.png'
+          "
           class="doctor-img"
-        />
-
-        <img
-          *ngIf="doctor.gender?.toLowerCase() === 'female'"
-          src="assets/img/femaledoctor.png"
-          class="doctor-img"
+          alt="Doctor Image"
         />
       </div>
     </div>
@@ -42,10 +41,15 @@
     <!-- Doctor Info -->
     <div class="card-details">
       <p class="text">{{ doctor.doctorname }}</p>
+
       <p class="text">{{ doctor.email }}</p>
+
       <p class="text">{{ doctor.experience }} yrs experience</p>
+
       <p class="text">{{ doctor.specialization }}</p>
+
       <p class="text">{{ doctor.gender }}</p>
+
       <p class="text">{{ doctor.mobile }}</p>
 
       <!-- Status -->

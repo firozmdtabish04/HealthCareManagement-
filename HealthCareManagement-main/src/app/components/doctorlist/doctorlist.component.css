@@ -1,72 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
 
+
 /* ---------- Heading ---------- */
 
 .heading-text {
+
   font-size: 40px;
   color: maroon;
   font-family: 'Aladin', cursive;
   text-align: center;
   margin-top: 15px;
+
 }
 
+
 .subheading-text {
+
   text-align: center;
   color: green;
   font-weight: bold;
   margin-bottom: 20px;
+
 }
+
 
 /* ---------- Search ---------- */
 
 .search-container {
+
   text-align: center;
   margin-bottom: 20px;
+
 }
 
 .search-box {
+
   width: 300px;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid gray;
+  outline: none;
+
 }
+
 
 /* ---------- Container ---------- */
 
 .doctor-container {
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
+
 }
+
 
 /* ---------- Card ---------- */
 
 .doctor-card {
+
   width: 420px;
   display: flex;
   background: #eaeaea;
   border-radius: 15px;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
-  transition: 0.3s;
+  transition: 0.3s ease;
+
 }
 
 .doctor-card:hover {
+
   transform: scale(1.05);
+
 }
+
 
 /* ---------- Image Section ---------- */
 
 .img-block {
+
   width: 40%;
   background: rgb(192, 56, 56);
   border-radius: 15px 0 0 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
+
 .circle {
+
   width: 130px;
   height: 130px;
   background: rgb(212, 188, 50);
@@ -74,63 +99,95 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
+
+/* FIXED IMAGE SIZE */
 .doctor-img {
+
   width: 90px;
+  height: 90px;
+  object-fit: contain;
+
 }
+
 
 /* ---------- Details ---------- */
 
 .card-details {
+
   padding: 15px;
   width: 60%;
+
 }
 
+
 .text {
+
   font-weight: bold;
   color: maroon;
+  margin: 5px 0;
+
 }
+
 
 /* ---------- Status ---------- */
 
 .status {
+
   text-align: center;
   padding: 6px;
   border-radius: 15px;
   margin-top: 10px;
   color: white;
   font-style: italic;
+  font-weight: bold;
+
 }
 
+
 .approved {
+
   background: green;
+
 }
 
 .pending {
+
   background: orange;
+
 }
 
 .rejected {
+
   background: red;
+
 }
+
 
 /* ---------- Responsive ---------- */
 
 @media(max-width:768px) {
 
   .doctor-card {
+
     width: 90%;
     flex-direction: column;
+
   }
 
   .img-block {
+
     width: 100%;
     border-radius: 15px 15px 0 0;
+
   }
 
   .card-details {
+
     width: 100%;
+
   }
 
 }
