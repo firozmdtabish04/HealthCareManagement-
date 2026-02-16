@@ -29,7 +29,6 @@ import { AddprescriptionComponent } from './components/addprescription/addprescr
 import { PrescriptionlistComponent } from './components/prescriptionlist/prescriptionlist.component';
 import { WelcomepageComponent } from './components/welcomepage/welcomepage.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,9 +61,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   providers: [],
-  bootstrap: [AppComponent, RegistrationComponent]
+  bootstrap: [AppComponent]   // ✅ FIXED
 })
 export class AppModule { }

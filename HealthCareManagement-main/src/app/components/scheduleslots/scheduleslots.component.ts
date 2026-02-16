@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Slots } from 'src/app/models/slots';
 import { DoctorService } from 'src/app/services/doctor.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-scheduleslots',
   templateUrl: './scheduleslots.component.html',
@@ -13,39 +15,47 @@ export class ScheduleslotsComponent implements OnInit {
 
   currRole = '';
   loggedUser = '';
-  slot = new Slots();
-  slots: Observable<Slots[]> | undefined;
 
-  constructor(private _service: DoctorService, private _router: Router) { }
+  slot = new Slots();
+
+  slots?: Observable<Slots[]>;
+
+  constructor(
+    private _service: DoctorService,
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
+
     $("#slotform").hide();
 
-    $(".add-slot-btn").click(function () {
+    $(".add-slot-btn").click(() => {
       $("#slotform").show();
       $("#slot-preview").hide();
     });
 
-    this.loggedUser = JSON.stringify(sessionStorage.getItem('loggedUser') || '{}');
-    this.loggedUser = this.loggedUser.replace(/"/g, '');
-
-    this.currRole = JSON.stringify(sessionStorage.getItem('ROLE') || '{}');
-    this.currRole = this.currRole.replace(/"/g, '');
+    this.loggedUser = sessionStorage.getItem('loggedUser') || '';
+    this.currRole = sessionStorage.getItem('ROLE') || '';
 
     this.slots = this._service.getSlotDetails(this.loggedUser);
   }
 
-  addSlot() {
-    this._service.addBookingSlots(this.slot).subscribe(
-      data => {
-        console.log("Slots added Successfully");
+  addSlot(): void {
+
+    this._service.addBookingSlots(this.slot).subscribe({
+
+      next: () => {
+        console.log("Slots added successfully");
         this._router.navigate(['/doctordashboard']);
       },
-      error => {
-        console.log("process Failed");
+
+      error: (error) => {
+        console.log("Process Failed");
         console.log(error.error);
       }
-    )
+
+    });
+
   }
 
 }

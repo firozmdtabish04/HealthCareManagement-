@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from 'src/app/models/appointment';
-import { Doctor } from 'src/app/models/doctor';
 import { Slots } from 'src/app/models/slots';
 import { DoctorService } from 'src/app/services/doctor.service';
 
@@ -12,47 +11,65 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class PatientlistComponent implements OnInit {
 
-  currRole = '';
-  loggedUser = '';
-  patients: Observable<Appointment[]> | undefined;
-  slots: Observable<Slots[]> | undefined;
-  responses: Observable<any> | undefined;
+  currRole: string = '';
+  loggedUser: string = '';
 
-  constructor(private _service: DoctorService) { }
+  patients$!: Observable<Appointment[]>;
+  slots$!: Observable<Slots[]>;
+
+  constructor(private doctorService: DoctorService) { }
 
   ngOnInit(): void {
-    this.loggedUser = JSON.stringify(sessionStorage.getItem('loggedUser') || '{}');
-    this.loggedUser = this.loggedUser.replace(/"/g, '');
 
-    this.currRole = JSON.stringify(sessionStorage.getItem('ROLE') || '{}');
-    this.currRole = this.currRole.replace(/"/g, '');
+    this.loggedUser = sessionStorage.getItem('loggedUser') || '';
+    this.currRole = sessionStorage.getItem('ROLE') || '';
 
-    if (this.currRole === "user")
+    if (this.currRole.toLowerCase() === 'user')
     {
-      this.patients = this._service.getPatientListByDoctorEmail(this.loggedUser);
-    }
-    else
+      this.patients$ = this.doctorService.getPatientListByDoctorEmail(this.loggedUser);
+    } else
     {
-      this.patients = this._service.getPatientList();
+      this.patients$ = this.doctorService.getPatientList();
     }
-    this.slots = this._service.getSlotDetails(this.loggedUser);
+
+    this.slots$ = this.doctorService.getSlotDetails(this.loggedUser);
   }
 
-  acceptRequest(slot: string) {
-    this.responses = this._service.acceptRequestForPatientApproval(slot);
-    $("#acceptbtn").hide();
-    $("#rejectbtn").hide();
-    $("#acceptedbtn").show();
-    $("#rejectedbtn").hide();
+
+  acceptRequest(slot: string): void {
+
+    this.doctorService.acceptRequestForPatientApproval(slot)
+      .subscribe(() => {
+
+        // refresh patient list after accept
+        this.refreshPatients();
+
+      });
   }
 
-  rejectRequest(slot: string) {
-    this.responses = this._service.rejectRequestForPatientApproval(slot);
-    $("#acceptbtn").hide();
-    $("#rejectbtn").hide();
-    $("#acceptedbtn").hide();
-    $("#rejectedbtn").show();
+
+  rejectRequest(slot: string): void {
+
+    this.doctorService.rejectRequestForPatientApproval(slot)
+      .subscribe(() => {
+
+        // refresh patient list after reject
+        this.refreshPatients();
+
+      });
   }
 
+
+  refreshPatients(): void {
+
+    if (this.currRole.toLowerCase() === 'user')
+    {
+      this.patients$ = this.doctorService.getPatientListByDoctorEmail(this.loggedUser);
+    } else
+    {
+      this.patients$ = this.doctorService.getPatientList();
+    }
+
+  }
 
 }
