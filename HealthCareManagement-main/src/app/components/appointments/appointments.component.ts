@@ -11,22 +11,36 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class AppointmentsComponent implements OnInit {
 
-  loggedUser = '';
-  currRole = '';
-  appointments: Observable<Appointment[]> | undefined;
-  slots: Observable<Slots[]> | undefined;
+  loggedUser: string = '';
+  currRole: string = '';
 
-  constructor(private _service: DoctorService) { }
+  appointments!: Observable<Appointment[]>;
+  slots!: Observable<Slots[]>;
+
+  constructor(private doctorService: DoctorService) { }
 
   ngOnInit(): void {
-    this.loggedUser = JSON.stringify(sessionStorage.getItem('loggedUser') || '{}');
-    this.loggedUser = this.loggedUser.replace(/"/g, '');
 
-    this.currRole = JSON.stringify(sessionStorage.getItem('ROLE') || '{}');
-    this.currRole = this.currRole.replace(/"/g, '');
+    this.loggedUser =
+      sessionStorage.getItem('loggedUser') || '';
 
-    this.appointments = this._service.getPatientListByDoctorEmailAndDate(this.loggedUser);
-    this.slots = this._service.getSlotDetails(this.loggedUser);
+    this.currRole =
+      sessionStorage.getItem('ROLE') || '';
+
+    this.loadAppointments();
+
+  }
+
+  loadAppointments(): void {
+
+    this.appointments =
+      this.doctorService
+        .getPatientListByDoctorEmailAndDate(this.loggedUser);
+
+    this.slots =
+      this.doctorService
+        .getSlotDetails(this.loggedUser);
+
   }
 
 }

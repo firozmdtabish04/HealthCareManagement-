@@ -1,133 +1,167 @@
-@import url('https://fonts.googleapis.com/css2?family=Aladin&family=Merienda+One&family=Staatliches&display=swap');
+.appointments-container {
 
-.row
-  {
-    margin-left: 10%;
-    margin-top: 3%;
-  }
-  #bloodCards
-  {
-    margin-right: 5%;
-    margin-bottom: 4%;
-    border-radius: 15px;
-    padding: 0px;
-    width: 30%;
-    height: 60%;
-    transition: transform .2s;
-    box-shadow: 5px 5px 25px 8px rgb(147, 158, 147);
-  }
-  #bloodCards:hover
-  {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-.card-block
-{
-  margin-top: 2%;
-  margin-left: 10%;
+  padding: 40px;
+
+  background: #f4fbfb;
+
+  min-height: 100vh;
+
 }
-.text{
-  font-family: serif;
-  font-size: larger;
-  font-weight: bolder;
-  margin-bottom: 1%;
+
+
+/* TITLE */
+
+.page-title {
+
+  text-align: center;
+
+  color: #0d7377;
+
+  font-size: 36px;
+
+  font-weight: bold;
+
 }
-#searchtxt
-{
-  width: 20%;
-  float: right;
+
+.page-subtitle {
+
+  text-align: center;
+
+  color: gray;
+
+  margin-bottom: 30px;
+
 }
-.img-block
-{
-    width: 100%;
-    height: 180px;
-    border-top-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: rgb(192, 56, 56);
+
+
+/* GRID */
+
+.appointments-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 25px;
+
 }
-.circle{
-    background-color: rgb(212, 188, 50);
-    margin-left: auto;
-    margin-right: auto;
-    align-content: center;
-    margin-top: 5%;
-    margin-bottom: auto;
-    border-radius: 50%;
-    width: 40%;
-    height: 80%;
+
+
+/* CARD */
+
+.appointment-card {
+
+  background: white;
+
+  border-radius: 15px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+  transition: 0.3s;
+
 }
-.bloodimg
-{
-    margin-left: 12%;
-    margin-top: 3%;
+
+.appointment-card:hover {
+
+  transform: translateY(-10px);
+
+  box-shadow: 0 15px 35px rgba(13, 115, 119, 0.3);
+
 }
-.status-btn
-{
-    padding: 5px 30px 5px 30px;
-    background-color: darkgreen;
-    color: white;
-    border-radius: 15px;
-    width: 200px;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-bottom: 3%;
+
+
+/* IMAGE */
+
+.image-section {
+
+  background: linear-gradient(135deg, #14a098, #0d7377);
+
+  text-align: center;
+
+  padding: 20px;
+
+  border-radius: 15px 15px 0 0;
+
 }
-.status-btn1
-{
-  background-color: rgb(199, 93, 32);
-  padding: 5px 30px 5px 30px;
-    color: white;
-    border-radius: 15px;
-    width: 200px;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-bottom: 3%;
+
+.image-section img {
+
+  width: 90px;
+
 }
-.status-btn2
-{
-  background-color: rgb(187, 40, 40);
-  padding: 5px 30px 5px 30px;
-    color: white;
-    border-radius: 15px;
-    width: 200px;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-bottom: 3%;
+
+
+/* BODY */
+
+.card-body {
+
+  padding: 20px;
+
 }
-.heading-text
-{
-    font-weight: bolder;
-    font-size: 40px;
-    margin-top: 1.5%;
-    color: maroon;
-    font-family: 'Aladin', cursive;
-    letter-spacing: 1px;
-    margin-left: 35%;
+
+.card-body h3 {
+
+  color: #0d7377;
+
+  margin-bottom: 10px;
+
 }
-.subheading-text
-{
-    font-weight: bolder;
-    font-size: 25px;
-    color: green;
-    font-family: 'Aladin', cursive;
-    letter-spacing: 1px;
-    margin-left: 35%;
-    margin-bottom: 1%;
+
+.card-body p {
+
+  margin: 5px 0;
+
 }
-.date-cover{
+
+
+/* STATUS */
+
+.status {
+
+  margin-top: 12px;
+
+  padding: 8px;
+
   border-radius: 10px;
-  background-color: rgb(10, 15, 68);
-  padding: 5px 10px 5px 10px;
+
+  text-align: center;
+
   color: white;
-  width: 30%;
-  font-weight: bolder;
+
+  font-weight: bold;
+
 }
-.slotcover
-{
-  border-radius: 10px;
-  background-color: rgb(128, 44, 18);
-  padding: 5px 10px 5px 10px;
-  color: white;
-  width: 30%;
-  font-weight: bolder;
+
+.accepted {
+
+  background: #28a745;
+
+}
+
+.rejected {
+
+  background: #dc3545;
+
+}
+
+.pending {
+
+  background: #ffc107;
+
+  color: black;
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:768px) {
+
+  .appointments-container {
+
+    padding: 15px;
+
+  }
+
 }

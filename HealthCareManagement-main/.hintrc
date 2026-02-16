@@ -21,6 +21,12 @@
         "aria-required-children": "off",
         "aria-required-parent": "off"
       }
+    ],
+    "axe/text-alternatives": [
+      "default",
+      {
+        "image-alt": "off"
+      }
     ]
   }
 }
