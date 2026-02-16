@@ -1,24 +1,23 @@
 <app-header></app-header>
 
 <div class="panel panel-primary">
+
   <div class="panel-heading">
-    <h2
-      style="
-        text-align: center;
-        font-family: &quot;Oswald&quot;, sans-serif;
-        color: darkgreen;
-        margin-top: 3%;
-        margin-bottom: 3%;
-      "
-    >
+
+    <h2 class="heading-text">
       Patient List
     </h2>
+
   </div>
+
+
   <div class="panel-body">
+
     <table class="table table-bordered">
+
       <thead>
         <tr>
-          <th>Idendity</th>
+          <th>Identity</th>
           <th>Patient ID</th>
           <th>Name</th>
           <th>Age</th>
@@ -29,34 +28,62 @@
           <th>Admission</th>
         </tr>
       </thead>
+
+
       <tbody>
+
         <tr *ngFor="let patient of patients | async">
+
+          <!-- Identity -->
           <td>
+
             <img
               *ngIf="patient.gender === 'Male' || patient.gender === 'male'"
-              class="bloodimg"
-              [src]="'assets/img/maleuser.png'"
-              width="80"
-              height="80"
+              class="user-img"
+              src="assets/img/maleuser.png"
+              alt="Male Patient"
             />
+
             <img
               *ngIf="patient.gender === 'Female' || patient.gender === 'female'"
-              class="bloodimg"
-              [src]="'assets/img/femaleuser.png'"
-              width="80"
-              height="80"
+              class="user-img"
+              src="assets/img/femaleuser.png"
+              alt="Female Patient"
             />
+
           </td>
+
+
+          <!-- Patient ID -->
           <td>
-            <div class="date-cover">{{ patient.patientid }}</div>
-          </td>
-          <td>{{ patient.patientname }}</td>
-          <td>{{ patient.age }} years</td>
-          <td>
-            <div *ngIf="loggedUser === 'admin@gmail.com'">
-              <div class="slotcover">{{ patient.slot }}</div>
+            <div class="date-cover">
+              {{ patient.patientid }}
             </div>
+          </td>
+
+
+          <!-- Name -->
+          <td>{{ patient.patientname }}</td>
+
+
+          <!-- Age -->
+          <td>{{ patient.age }} years</td>
+
+
+          <!-- Slot -->
+          <td>
+
+            <div *ngIf="loggedUser === 'admin@gmail.com'">
+
+              <div class="slotcover">
+                {{ patient.slot }}
+              </div>
+
+            </div>
+
+
             <div *ngFor="let slot of slots | async">
+
               <div
                 *ngIf="
                   patient.slot === 'AM slot' &&
@@ -64,8 +91,12 @@
                   patient.date === slot.date
                 "
               >
-                <div class="slotcover">{{ slot.amslot }}</div>
+                <div class="slotcover">
+                  {{ slot.amslot }}
+                </div>
               </div>
+
+
               <div
                 *ngIf="
                   patient.slot === 'Noon slot' &&
@@ -73,8 +104,12 @@
                   patient.date === slot.date
                 "
               >
-                <div class="slotcover">{{ slot.noonslot }}</div>
+                <div class="slotcover">
+                  {{ slot.noonslot }}
+                </div>
               </div>
+
+
               <div
                 *ngIf="
                   patient.slot === 'PM slot' &&
@@ -82,112 +117,129 @@
                   patient.date === slot.date
                 "
               >
-                <div class="slotcover">{{ slot.pmslot }}</div>
+                <div class="slotcover">
+                  {{ slot.pmslot }}
+                </div>
               </div>
+
+            </div>
+
+          </td>
+
+
+          <!-- Date -->
+          <td>
+            <div class="date-cover">
+              {{ patient.date }}
             </div>
           </td>
-          <td>
-            <div class="date-cover">{{ patient.date }}</div>
-          </td>
+
+
+          <!-- Problem -->
           <td>{{ patient.problem }}</td>
+
+
+          <!-- Approval -->
           <td>
+
             <div *ngIf="currRole === 'admin' || currRole === 'ADMIN'">
+
               <div
                 *ngIf="patient.appointmentstatus === 'accept'"
                 class="accepted"
               >
                 Accepted
               </div>
+
               <div
                 *ngIf="patient.appointmentstatus === 'false'"
                 class="pending"
               >
                 Pending
               </div>
+
               <div
                 *ngIf="patient.appointmentstatus === 'reject'"
                 class="rejected"
               >
                 Rejected
               </div>
+
             </div>
-            <div
-              *ngIf="
-                (patient.appointmentstatus === 'false' &&
-                  currRole === 'doctor') ||
-                currRole === 'DOCTOR'
-              "
-            >
+
+
+            <!-- Doctor controls -->
+            <div *ngIf="currRole === 'doctor' || currRole === 'DOCTOR'">
+
               <button
+                *ngIf="patient.appointmentstatus === 'false'"
                 (click)="acceptRequest(patient.slot)"
-                id="acceptbtn"
-                value="patient.email"
-                value="Accept"
-                style="margin-bottom: 5px"
                 class="accepted"
               >
-                Accept</button
-              ><br />
+                Accept
+              </button>
+
               <button
+                *ngIf="patient.appointmentstatus === 'false'"
                 (click)="rejectRequest(patient.slot)"
-                id="rejectbtn"
-                value="patient.email"
-                value="Reject"
                 class="rejected"
               >
                 Reject
               </button>
-              <div id="acceptedbtn" class="accepted" style="display: none">
-                Accepted
-              </div>
-              <div id="rejectedbtn" class="rejected" style="display: none">
-                Rejected
-              </div>
-            </div>
-            <div
-              *ngIf="
-                (patient.appointmentstatus === 'accept' &&
-                  currRole === 'doctor') ||
-                currRole === 'DOCTOR'
-              "
-            >
-              <div class="accepted">Accepted</div>
-            </div>
-            <div
-              *ngIf="
-                (patient.appointmentstatus === 'reject' &&
-                  currRole === 'doctor') ||
-                currRole === 'DOCTOR'
-              "
-            >
-              <div class="rejected">Rejected</div>
-            </div>
-            <div *ngFor="let details of responses | async"></div>
-          </td>
-          <td>
-            <div>
+
               <div
-                *ngIf="patient.admissionstatus === 'accept'"
+                *ngIf="patient.appointmentstatus === 'accept'"
                 class="accepted"
               >
-                Admitted
+                Accepted
               </div>
-              <div *ngIf="patient.admissionstatus === 'false'" class="pending">
-                Pending
-              </div>
+
               <div
-                *ngIf="patient.admissionstatus === 'reject'"
+                *ngIf="patient.appointmentstatus === 'reject'"
                 class="rejected"
               >
-                Not Admitted
+                Rejected
               </div>
+
             </div>
+
           </td>
+
+
+          <!-- Admission -->
+          <td>
+
+            <div
+              *ngIf="patient.admissionstatus === 'accept'"
+              class="accepted"
+            >
+              Admitted
+            </div>
+
+            <div
+              *ngIf="patient.admissionstatus === 'false'"
+              class="pending"
+            >
+              Pending
+            </div>
+
+            <div
+              *ngIf="patient.admissionstatus === 'reject'"
+              class="rejected"
+            >
+              Not Admitted
+            </div>
+
+          </td>
+
         </tr>
+
       </tbody>
+
     </table>
+
   </div>
+
 </div>
 
-<br /><br /><br /><br /><br /><br /><br /><br />
 <app-footer></app-footer>

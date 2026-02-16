@@ -1,183 +1,162 @@
 <app-header></app-header>
 
-<div class="heading"><h1>Your Prescription</h1></div>
+<div class="heading">
+  <h1>Your Prescription</h1>
+</div>
+
+<!-- Search Card -->
 <div class="message" id="messagecard">
   <form #tempform="ngForm" (ngSubmit)="searchPrescription()">
     <div class="form-group">
-      <label for="patientname"
-        >Patient Name : <b class="text-danger">*</b></label
-      >
+      <label>
+        Patient Name :
+        <b class="text-danger">*</b>
+      </label>
+
       <input
         type="text"
         class="form-control"
-        placeholder="enter patient name"
+        placeholder="Enter patient name"
         name="patientname"
-        [(ngModel)]="this.name"
+        [(ngModel)]="name"
         required
         #patientname="ngModel"
         [class.is-invalid]="patientname.invalid && patientname.touched"
       />
+
       <small
         class="text-danger"
         [class.d-none]="patientname.valid || patientname.untouched"
-        ><b>required field</b></small
       >
+        Required field
+      </small>
     </div>
+
     <button
-      style="margin-top: 15px"
-      [disabled]="tempform.form.invalid"
       type="submit"
-      class="btn registerbtn"
+      [disabled]="tempform.form.invalid"
+      class="registerbtn"
     >
-      <i class="fa fa-check"></i>&nbsp; search Prescription
+      Search Prescription
     </button>
   </form>
 </div>
+
+<!-- Prescription Pages -->
 <div *ngFor="let patient of prescriptionlist | async" id="prescriptionpages">
-  <button
-    id="printbtn"
-    (click)="onPrint()"
-    style="
-      background-color: rgb(13, 53, 80);
-      padding: 0.5% 3% 0.5% 3%;
-      color: white;
-      margin-left: 85%;
-      border: none;
-      border-radius: 15px;
-    "
-  >
-    <i class="fa fa-print"></i> &nbsp;Print
-  </button>
-  <div class="prescription-card" style="margin-bottom: 6%; margin-top: -2.5%">
-    <br />
+  <button id="printbtn" (click)="onPrint()" class="print-btn">Print</button>
+
+  <div class="prescription-card">
+    <!-- Header -->
     <div class="header-flag">
-      <div style="margin-left: 5%" class="topname">
+      <div class="header-left">
         <h3>Healthcare Management System</h3>
-      </div>
-      <div style="margin-left: 15%" class="topname">
         <h5>[developed by Tabish Firoz]</h5>
       </div>
-      <img
-        style="margin-left: 75%; margin-top: -17%"
-        [src]="'assets/img/medicinelogo.png'"
-        width="120"
-        height="90"
-      />
+
+      <!-- Patient Image -->
+      <div class="header-right">
+        <img
+          *ngIf="patient.gender === 'Male' || patient.gender === 'male'"
+          class="user-img"
+          src="assets/img/maleuser.png"
+          alt="Male Patient"
+        />
+
+        <img
+          *ngIf="patient.gender === 'Female' || patient.gender === 'female'"
+          class="user-img"
+          src="assets/img/femaleuser.png"
+          alt="Female Patient"
+        />
+      </div>
     </div>
+
+    <!-- Body -->
     <div class="prescription-body">
       <hr />
-      <div style="color: rgb(30, 113, 146); font-weight: bold">
-        Dr.{{ patient.doctorname }} MBBS,MS,PhD
+
+      <div class="doctor-name">Dr. {{ patient.doctorname }} MBBS, MS, PhD</div>
+
+      <div class="info-row">
+        <div>
+          PatientID :
+          <span class="highlight">{{ patient.patientid }}</span>
+        </div>
+
+        <div>
+          Date :
+          <span class="highlight">{{ patient.date }}</span>
+        </div>
       </div>
-      <div
-        style="
-          color: black;
-          font-weight: bold;
-          margin-top: -5%;
-          margin-left: 70%;
-        "
-      >
-        <small style="color: rgb(9, 68, 70)"
-          ><b>PatientID : </b
-          ><b style="color: maroon">{{ patient.patientid }}</b></small
-        >
+
+      <div class="info-row">
+        <div>
+          Age :
+          <span class="highlight">{{ patient.age }}</span>
+        </div>
       </div>
-      <div style="color: black; font-weight: bold">
-        <small style="color: rgb(9, 68, 70)"
-          ><b>Age : </b><b style="color: darkblue">{{ patient.age }}</b></small
-        >
-      </div>
-      <div
-        style="
-          color: black;
-          font-weight: bold;
-          margin-top: -5%;
-          margin-left: 74.5%;
-        "
-      >
-        <small style="color: rgb(9, 68, 70)"
-          ><b>Date : </b
-          ><b style="color: darkblue">{{ patient.date }}</b></small
-        >
-      </div>
+
       <hr />
-      <br />
-      <div style="color: black; font-weight: 600">
-        Please find your respective treatment prescription from your doctor...
-      </div>
-      <br />
-      <div style="color: darkblue; font-weight: 800; margin-bottom: 1%">
+
+      <div class="data-row">
         Patient Name :
-        <b style="color: maroon; margin-left: 12%">{{ patient.patientname }}</b>
+        <span>{{ patient.patientname }}</span>
       </div>
-      <div style="color: darkblue; font-weight: 800; margin-bottom: 1%">
+
+      <div class="data-row">
         Gender :
-        <b style="color: maroon; margin-left: 22%">{{ patient.gender }}</b>
+        <span>{{ patient.gender }}</span>
       </div>
-      <div style="color: darkblue; font-weight: 800; margin-bottom: 1%">
-        Patient Disease :
-        <b style="color: maroon; margin-left: 9%">{{ patient.disease }}</b>
+
+      <div class="data-row">
+        Disease :
+        <span>{{ patient.disease }}</span>
       </div>
-      <div style="color: darkblue; font-weight: 800; margin-bottom: 2%">
+
+      <div class="data-row">
         Prescription :
-        <b style="color: maroon; margin-left: 14.5%">{{
-          patient.prescription
-        }}</b>
+        <span>{{ patient.prescription }}</span>
       </div>
-      <div style="color: darkblue; font-weight: 800; margin-bottom: 1%">
+
+      <!-- Admission Status -->
+      <div class="data-row">
         Admission Status :
-        <b
-          style="
-            color: white;
-            background-color: rgb(245, 168, 24);
-            border-radius: 15px;
-            padding: 5px 15px 5px 15px;
-            margin-left: 6%;
-          "
+
+        <span
           *ngIf="patient.admissionstatus === 'false'"
-          >Admission Pending</b
+          class="status pending"
         >
-        <b
-          style="
-            color: white;
-            background-color: darkgreen;
-            border-radius: 15px;
-            padding: 5px 15px 5px 15px;
-            margin-left: 6%;
-          "
+          Admission Pending
+        </span>
+
+        <span
           *ngIf="patient.admissionstatus === 'accept'"
-          >Admitted</b
+          class="status accepted"
         >
-        <b
-          style="
-            color: white;
-            background-color: red;
-            border-radius: 15px;
-            padding: 5px 15px 5px 15px;
-            margin-left: 6%;
-          "
+          Admitted
+        </span>
+
+        <span
           *ngIf="patient.admissionstatus === 'reject'"
-          >Rejected</b
+          class="status rejected"
         >
+          Rejected
+        </span>
       </div>
-      <br /><br />
-      <div style="margin-left: 20%; font-weight: 600">
-        (Follow the above given prescriptions properly)
+
+      <div class="footer-message">
+        Follow prescriptions properly. Get Well Soon!
       </div>
-      <div style="margin-left: 40%; font-weight: 600">Get Well Soon !!!!</div>
     </div>
-    <div
-      class="footer-flag"
-      style="padding: 15px; color: white; margin-bottom: 3%"
-    >
-      <div style="margin-left: 5%; float: left">
-        <h6><i class="fa fa-phone"></i> &nbsp;9698382306 / 8610254674</h6>
-      </div>
-      <div style="margin-right: 5%; float: right">
-        <h6><i class="fa fa-envelope"></i> &nbsp;mdtabishfiroz04@gmail.com</h6>
-      </div>
+
+    <!-- Footer -->
+    <div class="footer-flag">
+      <div>Phone : 9698382306 / 8610254674</div>
+
+      <div>Email : mdtabishfiroz04@gmail.com</div>
     </div>
   </div>
 </div>
-<br /><br /><br /><br />
+
 <app-footer></app-footer>

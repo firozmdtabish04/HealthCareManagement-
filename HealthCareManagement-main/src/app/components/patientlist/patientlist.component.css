@@ -1,83 +1,132 @@
 @import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
 
+
+/* Heading */
+
+.heading-text {
+
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  color: darkgreen;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+
+/* Panel */
+
 .panel-body {
-  margin-left: 1%;
+
+  margin-left: 2%;
   margin-right: 2%;
+
+}
+
+
+/* Table */
+
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+
 }
 
 thead {
+
   background-color: rgb(136, 96, 35);
-}
 
-table,
-td {
-  text-align: center;
-  align-items: center;
-  vertical-align: middle;
-}
-
-table,
-td,
-tr {
-  border: 1px solid rgb(163, 161, 161);
-  font-family: serif;
-  font-weight: bold;
-  font-style: normal;
-  font-size: large;
 }
 
 th {
+
   text-transform: uppercase;
   color: rgb(170, 44, 44);
   font-family: Helvetica;
   font-style: italic;
-  font-size: normal;
+  padding: 10px;
+
 }
 
 td {
-  text-transform: none;
+
+  border: 1px solid rgb(163, 161, 161);
+  font-family: serif;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+
 }
 
+
+/* Identity image */
+
+.user-img {
+
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+
+}
+
+
+/* Status styles */
+
 .accepted {
-  border: 1px solid black;
+
   border-radius: 10px;
-  background-color: rgb(30, 116, 30);
-  padding: 5px 10px 5px 10px;
-  color: rgb(192, 23, 23);
-  font-weight: bolder;
+  background-color: green;
+  padding: 5px 12px;
+  color: white;
+
 }
 
 .pending {
-  border: 1px solid black;
+
   border-radius: 10px;
-  background-color: rgb(196, 137, 28);
-  padding: 5px 10px 5px 10px;
-  color: rgb(190, 26, 26);
-  font-weight: bolder;
+  background-color: orange;
+  padding: 5px 12px;
+  color: white;
+
 }
 
 .rejected {
-  border: 1px solid black;
+
   border-radius: 10px;
   background-color: red;
-  padding: 5px 10px 5px 10px;
-  color: rgb(184, 26, 26);
-  font-weight: bolder;
+  padding: 5px 12px;
+  color: white;
+
 }
 
+
+/* Date and Slot */
+
 .date-cover {
+
   border-radius: 10px;
-  background-color: rgb(10, 15, 68);
-  padding: 5px 10px 5px 10px;
-  color: rgb(148, 23, 23);
-  font-weight: bolder;
+  background-color: navy;
+  padding: 5px 12px;
+  color: white;
+
 }
 
 .slotcover {
+
   border-radius: 10px;
-  background-color: rgb(128, 44, 18);
-  padding: 5px 10px 5px 10px;
-  color: rgb(191, 29, 29);
-  font-weight: bolder;
+  background-color: brown;
+  padding: 5px 12px;
+  color: white;
+
+}
+
+
+/* Hover */
+
+tr:hover {
+
+  background-color: #f5f5f5;
+
 }

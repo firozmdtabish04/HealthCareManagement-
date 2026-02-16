@@ -4,7 +4,12 @@
 
 <!-- Search -->
 <div class="search-container">
-  <input type="text" placeholder="Search users..." [(ngModel)]="searchText" />
+  <input
+    type="text"
+    placeholder="Search users..."
+    [(ngModel)]="searchText"
+    class="search-box"
+  />
 </div>
 
 <div class="user-container">
@@ -20,12 +25,14 @@
           *ngIf="user.gender?.toLowerCase() === 'male'"
           src="assets/img/maleuser.png"
           class="user-img"
+          alt="Male User"
         />
 
         <img
           *ngIf="user.gender?.toLowerCase() === 'female'"
           src="assets/img/femaleuser.png"
           class="user-img"
+          alt="Female User"
         />
       </div>
     </div>
@@ -33,9 +40,13 @@
     <!-- User Info -->
     <div class="card-details">
       <p class="text">{{ user.username }}</p>
+
       <p class="text">{{ user.email }}</p>
+
       <p class="text">{{ user.age }} years</p>
+
       <p class="text">{{ user.gender }}</p>
+
       <p class="text">{{ user.mobile }}</p>
     </div>
   </div>
