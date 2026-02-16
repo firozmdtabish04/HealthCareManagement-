@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';   // ✅ ADD THIS
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationsuccessComponent } from './components/registrationsuccess/registrationsuccess.component';
@@ -28,7 +30,10 @@ import { CheckslotsComponent } from './components/checkslots/checkslots.componen
 import { AddprescriptionComponent } from './components/addprescription/addprescription.component';
 import { PrescriptionlistComponent } from './components/prescriptionlist/prescriptionlist.component';
 import { WelcomepageComponent } from './components/welcomepage/welcomepage.component';
+
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AboutComponent } from './components/about/about.component';
+import { ServicesComponent } from './components/services/services.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,16 +59,19 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CheckslotsComponent,
     AddprescriptionComponent,
     PrescriptionlistComponent,
-    WelcomepageComponent
+    WelcomepageComponent,
+    AboutComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RouterModule      // ✅ THIS FIXES routerLink errors
   ],
   providers: [],
-  bootstrap: [AppComponent]   // ✅ FIXED
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

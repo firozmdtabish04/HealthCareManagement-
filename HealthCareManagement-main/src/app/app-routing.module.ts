@@ -25,6 +25,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { DoctorGuard } from './guards/doctor.guard';
 import { RouterGuard } from './guards/router.guard';
 import { UserGuard } from './guards/user.guard';
+import { AboutComponent } from './components/about/about.component';
+import { ServicesComponent } from './components/services/services.component';
 
 const routes: Routes = [
   { path: '', component: WelcomepageComponent },
@@ -47,7 +49,9 @@ const routes: Routes = [
   { path: 'addprescription', component: AddprescriptionComponent, canActivate: [DoctorGuard] },
   { path: 'prescriptionlist', component: PrescriptionlistComponent, canActivate: [UserGuard] },
   { path: 'edituserprofile', component: UserprofileComponent, canActivate: [UserGuard] },
-  { path: 'editdoctorprofile', component: DoctorprofileComponent, canActivate: [DoctorGuard] }
+  { path: 'editdoctorprofile', component: DoctorprofileComponent, canActivate: [DoctorGuard] },
+  {path: 'about', component: AboutComponent},
+  {path:'services', component:ServicesComponent}
 ];
 
 @NgModule({
