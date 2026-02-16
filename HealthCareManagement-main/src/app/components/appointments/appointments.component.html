@@ -1,48 +1,70 @@
 <app-header></app-header>
 
-<div class="heading-text"><b>Your Today's Appointments</b></div>
-<small class="subheading-text"
-  ><b>(all details of patients have been verified)</b></small
->
+<div class="heading-text">
+  <b>Your Today's Appointments</b>
+</div>
+
+<small class="subheading-text">
+  <b>(all details of patients have been verified)</b>
+</small>
+
 <div class="row">
   <div
     *ngFor="let patient of appointments | async"
     class="col-4 card"
     id="bloodCards"
   >
+    <!-- Image block -->
     <div class="img-block">
       <div class="circle">
+        <!-- Male Image -->
         <img
           *ngIf="patient.gender === 'Male' || patient.gender === 'male'"
           class="bloodimg"
           [src]="'assets/img/maleuser.png'"
           width="120"
           height="120"
+          alt="Male Patient Image"
         />
+
+        <!-- Female Image -->
         <img
           *ngIf="patient.gender === 'Female' || patient.gender === 'female'"
           class="bloodimg"
           [src]="'assets/img/femaleuser.png'"
           width="120"
           height="120"
+          alt="Female Patient Image"
         />
       </div>
     </div>
+
+    <!-- Card Details -->
     <div class="card-block">
       <div class="text">
-        <b style="color: darkblue">Patient ID : </b
-        ><b style="color: maroon"
-          ><small class="date-cover">{{ patient.patientid }}</small></b
-        >
+        <b style="color: darkblue">Patient ID : </b>
+        <b style="color: maroon">
+          <small class="date-cover">
+            {{ patient.patientid }}
+          </small>
+        </b>
       </div>
+
       <div class="text">
-        <b style="color: darkblue">Patient Name : </b
-        ><b style="color: maroon"> {{ patient.patientname }} </b>
+        <b style="color: darkblue">Patient Name : </b>
+        <b style="color: maroon">
+          {{ patient.patientname }}
+        </b>
       </div>
+
       <div class="text">
-        <b style="color: darkblue">Email : </b
-        ><b style="color: maroon"> {{ patient.email }} </b>
+        <b style="color: darkblue">Email : </b>
+        <b style="color: maroon">
+          {{ patient.email }}
+        </b>
       </div>
+
+      <!-- Slot -->
       <div class="text" *ngFor="let slot of slots | async">
         <div
           *ngIf="
@@ -51,11 +73,10 @@
             patient.date === slot.date
           "
         >
-          <div>
-            <b style="color: darkblue; font-weight: bold">Booked Slot : </b
-            ><small class="slotcover">{{ slot.amslot }}</small>
-          </div>
+          <b style="color: darkblue">Booked Slot : </b>
+          <small class="slotcover">{{ slot.amslot }}</small>
         </div>
+
         <div
           *ngIf="
             patient.slot === 'Noon slot' &&
@@ -63,11 +84,10 @@
             patient.date === slot.date
           "
         >
-          <div>
-            <b style="color: darkblue; font-weight: bold">Booked Slot : </b
-            ><small class="slotcover">{{ slot.noonslot }}</small>
-          </div>
+          <b style="color: darkblue">Booked Slot : </b>
+          <small class="slotcover">{{ slot.noonslot }}</small>
         </div>
+
         <div
           *ngIf="
             patient.slot === 'PM slot' &&
@@ -75,32 +95,42 @@
             patient.date === slot.date
           "
         >
-          <div>
-            <b style="color: darkblue; font-weight: bold">Booked Slot : </b
-            ><small class="slotcover">{{ slot.pmslot }}</small>
-          </div>
+          <b style="color: darkblue">Booked Slot : </b>
+          <small class="slotcover">{{ slot.pmslot }}</small>
         </div>
       </div>
+
       <div class="text">
-        <b style="color: darkblue">Patient Age : </b
-        ><b style="color: maroon"> {{ patient.age }} </b>
+        <b style="color: darkblue">Patient Age : </b>
+        <b style="color: maroon">
+          {{ patient.age }}
+        </b>
       </div>
+
       <div class="text">
-        <b style="color: darkblue">Patient Gender : </b
-        ><b style="color: maroon"> {{ patient.gender }} </b>
+        <b style="color: darkblue">Patient Gender : </b>
+        <b style="color: maroon">
+          {{ patient.gender }}
+        </b>
       </div>
+
       <div class="text">
-        <b style="color: darkblue">Patient Disease : </b
-        ><b style="color: maroon"> {{ patient.problem }} </b>
+        <b style="color: darkblue">Patient Disease : </b>
+        <b style="color: maroon">
+          {{ patient.problem }}
+        </b>
       </div>
     </div>
+
+    <!-- Status -->
     <div
-      style="border: none"
       class="status-btn1"
+      style="border: none"
       *ngIf="patient.admissionstatus === 'false'"
     >
-      <b style="font-style: italic; font-weight: bolder">Admission Pending</b>
+      <b>Admission Pending</b>
     </div>
+
     <div
       *ngIf="
         (patient.appointmentstatus === 'accept' && currRole === 'doctor') ||
@@ -109,6 +139,7 @@
     >
       <div class="status-btn">Booking Accepted</div>
     </div>
+
     <div
       *ngIf="
         (patient.appointmentstatus === 'reject' && currRole === 'doctor') ||
@@ -117,6 +148,7 @@
     >
       <div class="status-btn2">Booking Rejected</div>
     </div>
+
     <div
       *ngIf="
         (patient.appointmentstatus === 'false' && currRole === 'doctor') ||
@@ -127,5 +159,7 @@
     </div>
   </div>
 </div>
+
 <br /><br /><br />
+
 <app-footer></app-footer>

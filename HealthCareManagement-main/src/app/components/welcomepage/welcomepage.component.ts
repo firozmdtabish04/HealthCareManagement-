@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcomepage',
@@ -8,13 +8,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class WelcomepageComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private _router: Router) { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
+  /* Navigate to Login */
+  navigate(): void {
+    this.router.navigate(['/login']);
   }
 
-  navigate() {
-    this._router.navigate(['/login']);
+  /* Smooth Scroll to Services */
+  scrollToServices(): void {
+    const element = document.getElementById('services');
+
+    if (element)
+    {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
+
 }

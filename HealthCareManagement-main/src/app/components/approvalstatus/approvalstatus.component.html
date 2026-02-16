@@ -3,6 +3,7 @@
 <!-- SEARCH -->
 <div class="message" id="messagecard">
   <form #tempform="ngForm" (ngSubmit)="searchPatient()">
+
     <div class="form-group">
       <label>
         Patient Email Address:
@@ -25,6 +26,7 @@
       >
         required field
       </small>
+
     </div>
 
     <button
@@ -34,15 +36,19 @@
     >
       search Prescription
     </button>
+
   </form>
 </div>
 
+
 <!-- DOCTOR APPROVAL -->
 <div class="panel panel-primary" id="doctorapproval">
+
   <div class="panel-heading">
     <h2>Your approval status</h2>
 
     <div *ngFor="let doctor of approval | async">
+
       <div *ngIf="doctor.status === 'accept'">
         <small style="color: green">(Verified & Accepted)</small>
       </div>
@@ -54,11 +60,16 @@
       <div *ngIf="doctor.status === 'reject'">
         <small style="color: red">(Verified & Rejected)</small>
       </div>
+
     </div>
+
   </div>
 
+
   <div class="panel-body">
+
     <table>
+
       <thead>
         <tr>
           <th>Identity</th>
@@ -73,13 +84,17 @@
         </tr>
       </thead>
 
+
       <tbody>
+
         <tr *ngFor="let doctor of approval | async">
+
           <!-- FIXED TD -->
           <td>
             <img
               [src]="
-                doctor.gender && doctor.gender.toLowerCase().trim() === 'female'
+                doctor.gender &&
+                doctor.gender.toLowerCase().trim() === 'female'
                   ? 'assets/img/femaledoctor.png'
                   : 'assets/img/maledoctor.png'
               "
@@ -87,6 +102,7 @@
               alt="Doctor Image"
             />
           </td>
+
 
           <td>{{ doctor.doctorname }}</td>
 
@@ -102,30 +118,197 @@
 
           <td>{{ doctor.mobile }}</td>
 
+
           <td>
+
             <div
               *ngIf="
                 currRole === 'doctor' ||
                 (currRole === 'DOCTOR' && doctor.email === loggedUser)
               "
             >
-              <div *ngIf="doctor.status === 'accept'" class="accepted">
+
+              <div
+                *ngIf="doctor.status === 'accept'"
+                class="accepted"
+              >
                 Accepted
               </div>
 
-              <div *ngIf="doctor.status === 'false'" class="pending">
+              <div
+                *ngIf="doctor.status === 'false'"
+                class="pending"
+              >
                 Pending
               </div>
 
-              <div *ngIf="doctor.status === 'reject'" class="rejected">
+              <div
+                *ngIf="doctor.status === 'reject'"
+                class="rejected"
+              >
                 Rejected
               </div>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+
+<!-- PATIENT APPROVAL -->
+<div class="panel panel-primary" id="patientapproval">
+
+  <div class="panel-heading">
+    <h2>Your approval status</h2>
+  </div>
+
+
+  <div class="panel-body">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Identity</th>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Slot</th>
+          <th>Date</th>
+          <th>Problem</th>
+          <th>Approval</th>
+          <th>Admission</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+
+        <tr *ngFor="let patient of appointment | async">
+
+          <!-- FIXED TD -->
+          <td>
+            <img
+              [src]="
+                patient.gender &&
+                patient.gender.toLowerCase().trim() === 'female'
+                  ? 'assets/img/femaleuser.png'
+                  : 'assets/img/maleuser.png'
+              "
+              class="doc-img"
+              alt="Patient Image"
+            />
+          </td>
+
+
+          <td>
+            <div class="date-cover">
+              {{ patient.patientid }}
             </div>
           </td>
+
+
+          <td>{{ patient.patientname }}</td>
+
+          <td>{{ patient.age }}</td>
+
+
+          <td>
+            <div class="slotcover">
+              {{ patient.slot }}
+            </div>
+          </td>
+
+
+          <td>
+            <div class="date-cover">
+              {{ patient.date }}
+            </div>
+          </td>
+
+
+          <td>{{ patient.problem }}</td>
+
+
+          <td>
+
+            <div
+              *ngIf="
+                currRole === 'user' ||
+                (currRole === 'USER' && patient.email === loggedUser)
+              "
+            >
+
+              <div
+                *ngIf="patient.appointmentstatus === 'accept'"
+                class="accepted"
+              >
+                Accepted
+              </div>
+
+              <div
+                *ngIf="patient.appointmentstatus === 'false'"
+                class="pending"
+              >
+                Pending
+              </div>
+
+              <div
+                *ngIf="patient.appointmentstatus === 'reject'"
+                class="rejected"
+              >
+                Rejected
+              </div>
+
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div
+              *ngIf="patient.admissionstatus === 'accept'"
+              class="accepted"
+            >
+              Admitted
+            </div>
+
+            <div
+              *ngIf="patient.admissionstatus === 'false'"
+              class="pending"
+            >
+              Pending
+            </div>
+
+            <div
+              *ngIf="patient.admissionstatus === 'reject'"
+              class="rejected"
+            >
+              Not Admitted
+            </div>
+
+          </td>
+
         </tr>
+
       </tbody>
+
     </table>
+
   </div>
+
 </div>
+
 
 <app-footer></app-footer>
