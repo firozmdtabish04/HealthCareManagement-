@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Doctor } from 'src/app/models/doctor';
 import { DoctorService } from 'src/app/services/doctor.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-approvedoctors',
@@ -17,6 +16,9 @@ export class ApprovedoctorsComponent implements OnInit {
   currRole: string = '';
   loggedUser: string = '';
 
+  loading: boolean = true;
+  error: string = '';
+
   constructor(private _service: DoctorService) { }
 
   ngOnInit(): void {
@@ -25,32 +27,65 @@ export class ApprovedoctorsComponent implements OnInit {
     this.currRole = sessionStorage.getItem('ROLE') || '';
 
     this.loadDoctors();
+
   }
 
-  loadDoctors() {
+  loadDoctors(): void {
+
+    this.loading = true;
+
     this.doctors = this._service.getDoctorList();
-  }
 
-  // ⭐ Accept Doctor
-  acceptRequest(email: string) {
-
-    this._service.acceptRequestForDoctorApproval(email).subscribe(() => {
-      alert('Doctor Approved Successfully');
-      this.loadDoctors();
+    this.doctors.subscribe({
+      next: () => this.loading = false,
+      error: () => {
+        this.error = 'Failed to load doctors';
+        this.loading = false;
+      }
     });
+
   }
 
-  // ⭐ Reject Doctor
-  rejectRequest(email: string) {
+  // Accept Doctor
+  acceptRequest(email: string): void {
 
-    this._service.rejectRequestForDoctorApproval(email).subscribe(() => {
-      alert('Doctor Rejected');
-      this.loadDoctors();
+    if (!email) return;
+
+    this._service.acceptRequestForDoctorApproval(email).subscribe({
+
+      next: () => {
+        alert('Doctor Approved Successfully');
+        this.loadDoctors();
+      },
+
+      error: () => alert('Approval Failed')
+
     });
+
   }
 
-  // ⭐ Search Filter
+  // Reject Doctor
+  rejectRequest(email: string): void {
+
+    if (!email) return;
+
+    this._service.rejectRequestForDoctorApproval(email).subscribe({
+
+      next: () => {
+        alert('Doctor Rejected Successfully');
+        this.loadDoctors();
+      },
+
+      error: () => alert('Rejection Failed')
+
+    });
+
+  }
+
+  // Search Filter
   filterDoctor(doctor: Doctor): boolean {
+
+    if (!doctor) return false;
 
     if (!this.searchText) return true;
 
@@ -61,28 +96,47 @@ export class ApprovedoctorsComponent implements OnInit {
       doctor.email?.toLowerCase().includes(search) ||
       doctor.specialization?.toLowerCase().includes(search)
     );
+
   }
 
-  // ⭐ Status Label
-  getStatusLabel(status?: string) {
+  // Status Label
+  getStatusLabel(status?: string): string {
 
     switch (status)
     {
-      case 'accept': return 'Accepted';
-      case 'reject': return 'Rejected';
-      default: return 'Pending';
+
+      case 'accept':
+        return 'Approved';
+
+      case 'reject':
+        return 'Rejected';
+
+      case 'false':
+      default:
+        return 'Pending';
+
     }
+
   }
 
-  // ⭐ Status Class
-  getStatusClass(status?: string) {
+  // Status Class
+  getStatusClass(status?: string): string {
 
     switch (status)
     {
-      case 'accept': return 'accepted';
-      case 'reject': return 'rejected';
-      default: return 'pending';
+
+      case 'accept':
+        return 'accepted';
+
+      case 'reject':
+        return 'rejected';
+
+      case 'false':
+      default:
+        return 'pending';
+
     }
+
   }
 
 }
