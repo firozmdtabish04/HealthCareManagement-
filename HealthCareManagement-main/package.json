@@ -2,7 +2,7 @@
   "name": "cls",
   "version": "0.0.0",
   "private": true,
-  "description": "![](https://img.shields.io/github/languages/count/gowthamrajk/HealthCareManagement)   ![](https://img.shields.io/github/languages/top/gowthamrajk/HealthCareManagement)",
+  "description": "![](https://img.shields.io/github/languages/count/gowthamrajk/HealthCareManagement) ![](https://img.shields.io/github/languages/top/gowthamrajk/HealthCareManagement)",
   "license": "ISC",
   "author": "",
   "type": "commonjs",
@@ -11,8 +11,13 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": ">=6.14.0"
   },
   "dependencies": {
     "@angular/animations": "~12.0.3",
