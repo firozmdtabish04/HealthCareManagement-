@@ -12,12 +12,11 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "vercel-build": "ng build --configuration production"
   },
   "engines": {
-    "node": "16.x",
-    "npm": ">=6.14.0"
+    "node": "18.x",
+    "npm": ">=8.0.0"
   },
   "dependencies": {
     "@angular/animations": "~12.0.3",
