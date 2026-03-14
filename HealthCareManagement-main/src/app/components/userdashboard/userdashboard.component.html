@@ -24,7 +24,6 @@
         src="assets/img/femaleuser.png"
       />
 
-
       <p *ngIf="!isCollapsed">User Panel</p>
     </div>
 
@@ -99,20 +98,6 @@
         </p>
       </div>
 
-      <!-- PATIENTS -->
-
-      <div class="stat-card red" routerLink="/patientlist">
-        <div class="icon-circle">
-          <i class="fa fa-user"></i>
-        </div>
-
-        <h3>Total Patients</h3>
-
-        <p *ngFor="let patient of patients | async">
-          {{ patient }}
-        </p>
-      </div>
-
       <!-- SLOTS -->
 
       <div class="stat-card green" routerLink="/checkslots">
@@ -165,5 +150,3 @@
     </div>
   </div>
 </div>
-
-<app-footer></app-footer>

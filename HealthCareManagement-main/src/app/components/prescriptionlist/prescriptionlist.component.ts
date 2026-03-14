@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Prescription } from 'src/app/models/prescription';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,29 +10,44 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PrescriptionlistComponent implements OnInit {
 
-  prescriptionlist: Observable<Prescription[]> | undefined;
+  prescriptionlist!: Observable<Prescription[]>;
+
   name: string = '';
+  showPrescription = false;
+  notFound = false;
 
   constructor(private _service: UserService) { }
 
-  ngOnInit(): void {
-
-    $('#messagecard').show();
-    $('#prescriptionpages').hide();
-
-  }
+  ngOnInit(): void { }
 
   searchPrescription() {
-    this.prescriptionlist = this._service.getPrescriptionsByName(this.name);
-    $('#messagecard').hide();
-    $('#prescriptionpages').show();
+
+    this._service.getPrescriptionsByName(this.name).subscribe(data => {
+
+      if (data.length === 0)
+      {
+
+        this.notFound = true;
+        this.showPrescription = false;
+
+      }
+      else
+      {
+
+        this.notFound = false;
+        this.showPrescription = true;
+
+        // store result instead of calling API again
+        this.prescriptionlist = of(data);
+
+      }
+
+    });
+
   }
 
   onPrint() {
-    $("#printbtn").hide();
-    $("#prescriptionpages").css('margin-top', '6%');
     window.print();
   }
 
 }
-  

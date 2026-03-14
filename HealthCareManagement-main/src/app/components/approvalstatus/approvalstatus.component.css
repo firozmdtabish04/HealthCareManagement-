@@ -1,6 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
 
+/* PAGE LAYOUT */
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* FOOTER STICK BOTTOM */
+
+  {
+  margin-top: auto;
+}
+
+
+/* BACK BUTTON */
+
+.top-bar {
+  margin: 20px;
+}
+
+.back-btn {
+  background: #0f4c75;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #3282b8;
+}
 
 /* =========================
    ROOT / PAGE

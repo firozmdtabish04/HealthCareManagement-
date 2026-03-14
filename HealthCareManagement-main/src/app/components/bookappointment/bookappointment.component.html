@@ -1,5 +1,10 @@
 <app-header></app-header>
 
+<!-- BACK BUTTON -->
+<div class="top-bar">
+  <button class="back-btn" routerLink="/userdashboard">← Back</button>
+</div>
+
 <div class="message" id="messagecard">
   <b>{{ message }}</b>
 </div>
@@ -16,10 +21,12 @@
 
   <form #bookappointmentform="ngForm" (ngSubmit)="bookAppointment()">
     <!-- Patient Name -->
+
     <div class="form-group">
       <label for="patientname">
         Patient Name :
         <b class="text-danger">*</b>
+
         <small style="color: gray; font-size: 12px">
           (please enter full name of the patient with initial)
         </small>
@@ -46,6 +53,7 @@
     </div>
 
     <!-- Email -->
+
     <div class="form-group">
       <label for="patientemail">
         Email address :
@@ -77,6 +85,7 @@
     </div>
 
     <!-- Doctor -->
+
     <div class="form-group">
       <label for="doctor">
         Choose Doctor :
@@ -99,6 +108,7 @@
     </div>
 
     <!-- Specialization -->
+
     <div class="form-group">
       <label for="specialization">
         Specialization :
@@ -124,6 +134,7 @@
     </div>
 
     <!-- Date -->
+
     <div class="form-group">
       <label for="date">
         Appointment Date :
@@ -147,6 +158,7 @@
     </div>
 
     <!-- Slot -->
+
     <div class="form-group">
       <label for="slot">
         Appointment Slot :
@@ -160,13 +172,17 @@
         [(ngModel)]="appointment.slot"
         #slot="ngModel"
       >
+        <option value="">Select Slot</option>
         <option value="AM slot">AM slot</option>
+
         <option value="Noon slot">Noon slot</option>
+
         <option value="PM slot">PM slot</option>
       </select>
     </div>
 
     <!-- Age -->
+
     <div class="form-group">
       <label for="age">
         Patient Age :
@@ -174,6 +190,7 @@
       </label>
 
       <input
+        placeholder="add age"
         type="text"
         id="age"
         class="form-control"
@@ -190,6 +207,7 @@
     </div>
 
     <!-- Gender -->
+
     <div class="form-group">
       <label for="gender">
         Patient Gender :
@@ -203,13 +221,17 @@
         [(ngModel)]="appointment.gender"
         #gender="ngModel"
       >
+        <option value="">Select gender</option>
         <option value="Male">Male</option>
+
         <option value="Female">Female</option>
+
         <option value="Others">Others</option>
       </select>
     </div>
 
     <!-- Problem -->
+
     <div class="form-group">
       <label for="problem">
         Patient's Problem :
@@ -217,6 +239,7 @@
       </label>
 
       <input
+        placeholder="enter your problems"
         type="text"
         id="problem"
         class="form-control"
@@ -236,6 +259,7 @@
     </div>
 
     <!-- Submit -->
+
     <button
       style="margin-top: 15px"
       [disabled]="bookappointmentform.form.invalid"
@@ -249,5 +273,3 @@
 </div>
 
 <br /><br />
-
-<app-footer></app-footer>
